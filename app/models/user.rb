@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :sections
+  has_many :created_sections, class_name: "Section", foreign_key: 'user_id'
   def self.find_or_create_from_auth(auth)
     provider = auth[:provider]
     uid = auth[:uid]

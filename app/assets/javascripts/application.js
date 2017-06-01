@@ -14,3 +14,10 @@
 //= require turbolinks
 //= require bootstrap/dist/js/bootstrap
 //= require_tree .
+//
+$('.fab').hover(function () {
+      $(this).toggleClass('active');
+});
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
