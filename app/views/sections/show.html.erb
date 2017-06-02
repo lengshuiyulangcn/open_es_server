@@ -1,8 +1,60 @@
-<%= stylesheet_pack_tag 'main' %>
-<%= javascript_pack_tag 'main' %>
-<% modified = @modification.blank? ? @section.content : @modification.content %>
-<%= content_tag :div,
-  nil,
-  id: "section_content",
-  data: { content: @section.content, title: @section.title, id: @section.id , modified: modified }
-%>
+<% if can? :create, Modification %>
+  <%= stylesheet_pack_tag 'main' %>
+  <%= javascript_pack_tag 'main' %>
+  <% modified = @modification.blank? ? @section.content : @modification.content %>
+  <%= content_tag :div,
+    nil,
+    id: "section_content",
+    data: { content: @section.content, title: @section.title, id: @section.id , modified: modified }
+  %>
+<% else %>
+  <% colWidth = @modification.blank? ? 'col-md-12' : 'col-md-6' %>
+  <div class="container section-detail">
+    <div class="row">
+      <div class="<%= colWidth %>">
+	<div class="box">
+	  <div class="box-icon">
+	    <span class="fa fa-4x fa-html5"></span>
+	  </div>
+	  <div class="info">
+	    <h4 class="text-center"><%= @section.title %></h4>
+	    <p><%= @section.content %></p>
+	  </div>
+	</div>
+      </div>
+        
+    <% if @modification %>
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-icon">
+                    <span class="fa fa-4x fa-css3"></span>
+                </div>
+                <div class="info">
+                    <h4 class="text-center"><%= @section.title %></h4>
+	    	      <p><%== @modification.highlighted_content %></p>
+                </div>
+            </div>
+        </div>
+     <% end %>
+ </div>
+    <% if @modification %>
+    <div class="row comment-box">
+      <div class="col-md-2">
+	  <div class="user-profile">
+	    <%= image_tag @modification.user.avatar_url, class: "user-photo" %>
+	  </div>
+	</div>
+	<div class="col-md-8">
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      点评
+	    </div>
+	    <div class="panel-body">
+	      <%= @modification.comment %>
+	    </div>
+           </div>
+         </div>
+      </div>
+      <% end %>
+  </div>
+<% end %>

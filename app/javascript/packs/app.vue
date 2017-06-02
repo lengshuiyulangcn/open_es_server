@@ -3,10 +3,10 @@
     <img src="./assets/logo.png">
     <div class="row">
       <div class="col-md-12">
-				<div class="bs-callout bs-callout-success">
-					<h4>{{origin.title}}</h4>
-						{{origin.content}}
-				</div>
+        <div class="bs-callout bs-callout-success">
+           <h4>{{origin.title}}</h4>
+           {{origin.content}}
+        </div>
       </div>
     </div>
     <div class="row">
@@ -14,7 +14,7 @@
         <Editor :content="dataModified" @input="update"></Editor>
       </div>
       <div class="col-md-6">
-				<Sheet :content="content"></Sheet>
+	<Sheet :content="content"></Sheet>
       </div>
     </div>
     <div class="row">
@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     content() {
-      var diff = differ.diffChars(this.$data.dataModified, this.$data.raw)
+      var diff = differ.diffChars(this.$data.raw,this.$data.dataModified)
       let result = ''
       diff.forEach(function (part) {
         if (part.removed) {
@@ -69,14 +69,15 @@ export default {
       axios.defaults.headers['X-CSRF-TOKEN'] = this.$data.token
       axios.post('/modifications', {
         section_id: this.$data.id,
-				content: this.$data.dataModified,
-			})
-			.then(function (response) {
-        that.$swal('saved')
-			})
-			.catch(function (error) {
+        content: this.$data.dataModified,
+        highlighted_content:  this.content
+      })
+	.then(function (response) {
+           that.$swal('saved')
+	 })
+	 .catch(function (error) {
         that.$swal('oops, something goes wrong')
-			})
+	})
     }
   }
 }
