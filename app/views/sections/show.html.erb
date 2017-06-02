@@ -1,0 +1,8 @@
+<%= stylesheet_pack_tag 'main' %>
+<%= javascript_pack_tag 'main' %>
+<% modified = @modification.blank? ? @section.content : @modification.content %>
+<%= content_tag :div,
+  nil,
+  id: "section_content",
+  data: { content: @section.content, title: @section.title, id: @section.id , modified: modified }
+%>
