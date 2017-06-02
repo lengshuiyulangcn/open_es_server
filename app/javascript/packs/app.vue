@@ -65,13 +65,17 @@ export default {
       this.dataModified = message
     },
     modify () {
+      var that = this
       axios.defaults.headers['X-CSRF-TOKEN'] = this.$data.token
       axios.post('/modifications', {
         section_id: this.$data.id,
 				content: this.$data.dataModified,
 			})
 			.then(function (response) {
-				console.log(response);
+        that.$swal('saved')
+			})
+			.catch(function (error) {
+        that.$swal('oops, something goes wrong')
 			})
     }
   }

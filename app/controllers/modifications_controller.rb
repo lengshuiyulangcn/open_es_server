@@ -5,9 +5,11 @@ class ModificationsController < ApplicationController
     if section.modification.blank?
       current_user.modifications.create(modification_params)
       head :created
-    else
+    elsif can? :update, section.modification
       section.modification.update!(modification_params)
       head :ok
+    else
+      head 400
     end
   end
 

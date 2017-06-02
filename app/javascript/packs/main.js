@@ -3,8 +3,10 @@
 import Vue from 'vue/dist/vue.esm'
 import App from './App'
 import BootstrapVue from 'bootstrap-vue'
+import VueSweetAlert from 'vue-sweetalert'
 
 Vue.use(BootstrapVue)
+Vue.use(VueSweetAlert)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
