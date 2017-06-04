@@ -1,6 +1,5 @@
 <template>
   <div id="app" class="container">
-    <img src="./assets/logo.png">
     <div class="row">
       <div class="col-md-12">
         <div class="bs-callout bs-callout-success">
@@ -18,6 +17,11 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-md-12">
+         <vue-editor id="comment-editor" placeholder="填写评论" v-model="comment"></vue-editor>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <button type='submit' class="btn btn-success long-btn" @click="modify">提交修改</button>
       </div>
@@ -31,12 +35,14 @@ import Editor from './components/Editor'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import * as differ from 'diff/dist/diff.min'
+import { VueEditor } from 'vue2-editor'
+
 import axios from 'axios'
 
 export default {
   name: 'app',
   data () {
-    return { dataModified: this.origin.modified, raw: this.origin.content, id: this.origin.id, token: this.token }
+    return { dataModified: this.origin.modified, raw: this.origin.content, id: this.origin.id, token: this.token, comment: this.origin.comment }
   },
   computed: {
     content() {
@@ -57,7 +63,8 @@ export default {
   },
   components: {
     Sheet,
-    Editor
+    Editor,
+    VueEditor
   },
   props: ['origin', 'token'],
   methods: {
@@ -70,6 +77,7 @@ export default {
       axios.post('/modifications', {
         section_id: this.$data.id,
         content: this.$data.dataModified,
+        comment: this.$data.comment,
         highlighted_content:  this.content
       })
 	.then(function (response) {
@@ -154,5 +162,8 @@ export default {
 }
 .bs-callout-info h4 {
     color: #5bc0de;
+}
+#comment-editor {
+  height: 250px;
 }
 </style>
