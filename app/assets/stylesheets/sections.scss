@@ -14,8 +14,12 @@
       text-align: center;
     }
   }
+  @media screen and (min-width: 911px)  {
   .list-info {
     width: 90%;
+    }
+  }
+  .list-info {
     display: inline-block;
     margin-top: 5px;
     font-size: 20px;

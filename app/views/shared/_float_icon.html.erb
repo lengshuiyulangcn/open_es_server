@@ -1,0 +1,27 @@
+<div id="inbox">
+  <div class="fab btn-group show-on-hover dropup">
+      <div data-toggle="tooltip" data-placement="left" title="Compose" style="margin-left: 42px;">
+  <button type="button" class="btn btn-danger btn-io dropdown-toggle" data-toggle="dropdown">
+    <span class="fa-stack fa-2x">
+        <i class="fa fa-circle fa-stack-2x fab-backdrop"></i>
+        <i class="fa fa-plus fa-stack-1x fa-inverse fab-primary"></i>
+        <i class="fa fa-pencil fa-stack-1x fa-inverse fab-secondary"></i>
+    </span>
+  </button></div>
+  <ul class="dropdown-menu dropdown-menu-right" role="menu">
+      <li><a href="<%= sections_path %>" data-toggle="tooltip" data-placement="left" title="首页"><i class="fa fa-home"></i></a></li>
+      <li>
+    <% if current_user %>
+      <li><a href="<%= new_section_path %>" data-toggle="tooltip" data-placement="left" title="写ES"><i class="fa fa-pencil"></i></a></li>
+      <li><a href="<%= sections_path %>" data-toggle="tooltip" data-placement="left" title="我的ES"><i class="fa fa-file-text-o"></i></a></li>
+      <li>
+        <%=link_to content_tag(:i, '', class: 'fa fa-sign-out'), logout_path, "data-toggle": "tooltip", "data-placement": "left", title: "退出登陆"%>
+      </li>
+    <% else %>
+      <li>
+        <%=link_to content_tag(:i, '', class: 'fa fa-sign-in'), '/auth/qilian', "data-toggle": "tooltip", "data-placement": "left", title: "登陆"%>
+      </li>
+    <% end %>
+  </ul>
+</div>
+</div>

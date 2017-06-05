@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>TryVue</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -9,6 +10,14 @@
   </head>
 
   <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <%= render partial: "shared/flash_messages", flash: flash %>
+          <%= render "shared/float_icon", partial: true%>
+        </div>
+      </div>
+    </div>
     <%= yield %>
   </body>
 </html>

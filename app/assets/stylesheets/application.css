@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require bootstrap/dist/css/bootstrap
+ *= require font-awesome
  *= require_self
  */
 
@@ -51,9 +52,9 @@ body{
     
 }
 #inbox .show-on-hover {
-    position: absolute;
-    bottom: 80px;
-    right: 80px;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
 }
 #inbox .btn-io{
     border-radius: 50%;
