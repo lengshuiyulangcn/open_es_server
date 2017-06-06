@@ -1,7 +1,7 @@
 class SectionsController < ApplicationController
   before_action :authenticate, except: [:index]
   def index
-    @sections = Section.page params[:page]
+    @sections = Section.includes(:tags).page params[:page]
   end
 
   def new
@@ -79,6 +79,6 @@ class SectionsController < ApplicationController
   private
 
   def section_params
-    params.require(:section).permit(:id,:content,:title)
+    params.require(:section).permit(:id,:content,:title, :tag_ids=>[])
   end
 end

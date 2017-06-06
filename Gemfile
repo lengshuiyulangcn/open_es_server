@@ -38,10 +38,13 @@ gem 'omniauth'
 gem 'omniauth-oauth2', '~> 1.3.1'
 
 gem 'cancancan'
+gem 'friendly_id'
 
 gem 'kaminari'
 gem 'simple_form'
 gem "font-awesome-rails"
+
+gem 'rails_admin'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

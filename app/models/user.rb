@@ -9,7 +9,11 @@ class User < ApplicationRecord
     uid = auth[:uid]
     name = auth[:info][:name]
     email = auth[:info][:email]
-    avatar_url = "https://forum.qilian.jp" + auth[:info][:avatar_url]
+    if(auth[:info][:avatar_url][0..3]!= 'http')
+      avatar_url = auth[:info][:avatar_url]
+    else
+      avatar_url = "https://forum.qilian.jp" + auth[:info][:avatar_url]
+    end
 
     self.find_or_create_by(provider: provider, uid: uid) do |user|
       user.name = name

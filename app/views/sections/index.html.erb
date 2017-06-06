@@ -14,15 +14,16 @@
 	    </div>
           </div>
           <div class="tags">
-            <a href="#" class="info">jQuery</a>
-            <a href="#" class="danger">HTML5</a>
-            <a href="#" class="warning">CSS3</a>
-            <a href="#" class="success">DEMO</a>
+            <% section.tags.each do |tag| %>
+              <%= link_to tag.name, "#", class: "success" %>
+            <% end %>
           </div>
           <div id="assignee_for_section_<%= section.id %>" class="assignee list-image-small">
             <% if section.assignee.blank? %>
-              <%= simple_form_for section, url: assign_section_path(section), method: :post, remote: true do |f|%>
-                <%=f.submit "我来修改", class: "btn btn-danger" %>
+              <% if can? :modify, section %>
+                <%= simple_form_for section, url: assign_section_path(section), method: :post, remote: true do |f|%>
+                  <%=f.submit "我来修改", class: "btn btn-danger" %>
+                <% end %>
               <% end %>
             <% else %>
               <span style="font-size: 12px; color: #ABA8A6;">修改指导: </span>

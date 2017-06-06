@@ -7,7 +7,7 @@
         <div class="col-md-12">
           <%= f.input :content,label: "内容",  as: :text  %>
         </div>
-        <div class="col-md-12 inline-block">
+        <div class="col-md-12">
           <%= f.input :tag_ids, label: "选择标签", collection: Tag.all,  as: :check_boxes%>
         </div>
         <div class="col-md-12">
