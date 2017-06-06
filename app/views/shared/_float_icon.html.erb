@@ -10,10 +10,12 @@
   </button></div>
   <ul class="dropdown-menu dropdown-menu-right" role="menu">
       <li><a href="<%= sections_path %>" data-toggle="tooltip" data-placement="left" title="首页"><i class="fa fa-home"></i></a></li>
-      <li>
     <% if current_user %>
-      <li><a href="<%= new_section_path %>" data-toggle="tooltip" data-placement="left" title="写ES"><i class="fa fa-pencil"></i></a></li>
-      <li><a href="<%= sections_path %>" data-toggle="tooltip" data-placement="left" title="我的ES"><i class="fa fa-file-text-o"></i></a></li>
+        <li><a href="<%= new_section_path %>" data-toggle="tooltip" data-placement="left" title="写ES"><i class="fa fa-pencil"></i></a></li>
+      <% if current_user.teacher? %>
+        <li><a href="<%= assigned_sections_path %>" data-toggle="tooltip" data-placement="left" title="批改ES"><i class="fa fa-eraser"></i></a></li>
+      <% end %>
+      <li><a href="<%= created_sections_path %>" data-toggle="tooltip" data-placement="left" title="我的ES"><i class="fa fa-file-text-o"></i></a></li>
       <li>
         <%=link_to content_tag(:i, '', class: 'fa fa-sign-out'), logout_path, "data-toggle": "tooltip", "data-placement": "left", title: "退出登陆"%>
       </li>

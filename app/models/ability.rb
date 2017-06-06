@@ -9,9 +9,16 @@ class Ability
       can :manage, :all
     end
     if user.teacher?
+      can :create, Section if user.created_sections.last.created_at < 1.hours.ago
+      can :edit, Section, user_id: user.id
       can :assign, Section, assignee_id: nil
       can :create, Modification
       can :update, Modification, user_id: user.id
+    end
+    if user.student?
+      # to prevent spam
+      can :create, Section if user.created_sections.last.created_at < 1.hours.ago
+      can :edit, section, user_id: user.id
     end
     #   else
     #     can :read, :all
