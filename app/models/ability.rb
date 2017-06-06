@@ -9,6 +9,7 @@ class Ability
       can :manage, :all
     end
     if user.teacher?
+      can :assign, Section, assignee_id: nil
       can :create, Modification
       can :update, Modification, user_id: user.id
     end

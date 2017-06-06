@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
   root "sections#index"
   resources :sections
+  post 'sections/:id/assign', to: 'sections#assign', as: "assign_section"
   resources :modifications
 end
