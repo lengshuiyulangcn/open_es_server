@@ -8,28 +8,29 @@
         <div class="list-info">
           <div class="list-title">
             <span class="title-url"><%=link_to section.title, section_path(section) %></span>
-            <div class="list-meta">
-              <span class='list-user'><%=section.author.name %></span> 发表于
-              <%= time_ago_in_words section.created_at %> ago
-              <%= link_to "编辑", edit_section_path(section) if current_user == section.author %>
-              <%= link_to("批改", modify_section_path(section), style: "color: red") if (current_user && current_user == section.assignee)  %>
-            </div>
-          </div>
-          <div class="tags">
-            <% section.tags.each do |tag| %>
-              <%= link_to tag.name, "#", class: "success" %>
-            <% end %>
           </div>
           <div id="assignee_for_section_<%= section.id %>" class="assignee list-image-small">
             <% if section.assignee.blank? %>
               <% if can? :modify, section %>
                 <%= simple_form_for section, url: assign_section_path(section), method: :post, remote: true do |f|%>
-                  <%=f.submit "我来修改", class: "btn btn-danger" %>
+                  <%=f.submit "我来修改", class: "btn btn-sm btn-danger" %>
                 <% end %>
               <% end %>
             <% else %>
               <span style="font-size: 12px; color: #ABA8A6;">修改指导: </span>
               <%= image_tag section.assignee.avatar_url, class: "list-image" %>
+            <% end %>
+          </div>
+          <div class="list-meta" id="list-meta-<%=section.id%>">
+              <span class='list-user'><%=section.author.name %></span> 发表于
+              <%= time_ago_in_words section.created_at %> ago
+
+              <%= link_to "编辑", edit_section_path(section) if current_user == section.author %>
+              <%= link_to("批改", modify_section_path(section), style: "color: red") if (current_user && current_user == section.assignee)  %>
+            </div>
+          <div class="tags">
+            <% section.tags.each do |tag| %>
+              <%= link_to tag.name, "#", class: "success" %>
             <% end %>
           </div>
         </div>

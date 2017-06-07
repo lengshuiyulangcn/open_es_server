@@ -28,12 +28,12 @@
 </div>
   <% if @modification %>
   <div class="row comment-box">
-    <div class="col-xs-2">
+    <div class="col-xs-4 col-md-2">
   <div class="user-profile">
     <%= image_tag @modification.user.avatar_url, class: "user-photo" %>
   </div>
 </div>
-<div class="col-xs-8">
+<div class="col-xs-8 col-md-8">
   <div class="panel panel-default">
     <div class="panel-heading">
             <span style="font-size: 12px;"><%=time_ago_in_words(@modification.updated_at)%> ago </span>
