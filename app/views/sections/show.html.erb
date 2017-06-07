@@ -20,7 +20,7 @@
             </div>
             <div class="info">
               <h4 class="text-center"><%= @section.title %></h4>
-              <p><%= @section.content %></p>
+              <p><%= simple_format(h @section.content) %></p>
             </div>
           </div>
         </div>
