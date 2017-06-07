@@ -1,65 +1,48 @@
-<% if can? :create, Modification %>
-  <%= stylesheet_pack_tag 'main' %>
-  <%= javascript_pack_tag 'main' %>
-  <% if @modification.blank? %>
-    <% modified = '' %>
-    <% comment = '' %>
-  <% else %>
-    <% modified = @modification.content %>
-    <% comment = @modification.comment %>
-  <% end %>
-  <%= content_tag :div,
-    nil,
-    id: "section_content",
-    data: { content: @section.content, title: @section.title, id: @section.id, modified: modified, comment: comment }
-  %>
-<% else %>
-  <div class="container section-detail">
-    <div class="row">
-    <% if @modification %>
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-icon">
-	            <%= image_tag @section.author.avatar_url, class: "user-photo" %>
-                </div>
-                <div class="info">
-                    <h4 class="text-center"><%= @section.title %></h4>
-	    	      <p><%== @modification.highlighted_content %></p>
-                </div>
-            </div>
-        </div>
-      <% else %>
-          <div class="col-md-12">
-            <div class="box">
+<div class="container section-detail">
+  <div class="row">
+  <% if @modification %>
+      <div class="col-md-12">
+          <div class="box">
               <div class="box-icon">
-	        <%= image_tag @section.author.avatar_url, class: "user-photo" %>
+            <%= image_tag @section.author.avatar_url, class: "user-photo" %>
               </div>
               <div class="info">
-                <h4 class="text-center"><%= @section.title %></h4>
-                <p><%= @section.content %></p>
+                  <h4 class="text-center"><%= @section.title %></h4>
+            <p><%== @modification.highlighted_content %></p>
               </div>
+          </div>
+      </div>
+    <% else %>
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-icon">
+        <%= image_tag @section.author.avatar_url, class: "user-photo" %>
+            </div>
+            <div class="info">
+              <h4 class="text-center"><%= @section.title %></h4>
+              <p><%= @section.content %></p>
             </div>
           </div>
-     <% end %>
- </div>
-    <% if @modification %>
-    <div class="row comment-box">
-      <div class="col-xs-2">
-	  <div class="user-profile">
-	    <%= image_tag @modification.user.avatar_url, class: "user-photo" %>
-	  </div>
-	</div>
-	<div class="col-xs-8">
-	  <div class="panel panel-default">
-	    <div class="panel-heading">
-              <span style="font-size: 12px;"><%=time_ago_in_words(@modification.updated_at)%> ago </span>
-	    </div>
-	    <div class="panel-body">
-	      <%== @modification.comment %>
-	    </div>
-           </div>
-         </div>
-      </div>
-      <% end %>
+        </div>
+   <% end %>
+</div>
+  <% if @modification %>
+  <div class="row comment-box">
+    <div class="col-xs-2">
+  <div class="user-profile">
+    <%= image_tag @modification.user.avatar_url, class: "user-photo" %>
   </div>
-<% end %>
+</div>
+<div class="col-xs-8">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+            <span style="font-size: 12px;"><%=time_ago_in_words(@modification.updated_at)%> ago </span>
+    </div>
+    <div class="panel-body">
+      <%== @modification.comment %>
+    </div>
+         </div>
+       </div>
+    </div>
+    <% end %>
+</div>

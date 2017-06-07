@@ -8,10 +8,12 @@
         <div class="list-info">
           <div class="list-title">
             <span class="title-url"><%=link_to section.title, section_path(section) %></span>
-	    <div class="list-meta">
-	      <span class='list-user'><%=section.author.name %></span> 发表于
-	      <%= time_ago_in_words section.created_at %> ago
-	    </div>
+            <div class="list-meta">
+              <span class='list-user'><%=section.author.name %></span> 发表于
+              <%= time_ago_in_words section.created_at %> ago
+              <%= link_to "编辑", edit_section_path(section) if current_user == section.author %>
+              <%= link_to("批改", modify_section_path(section), style: "color: red") if (current_user && current_user == section.assignee)  %>
+            </div>
           </div>
           <div class="tags">
             <% section.tags.each do |tag| %>
@@ -35,6 +37,8 @@
     <% end %>
   </div>
   <div class="row">
-    <%= paginate @sections %>
+      <div class="col-md-6 col-md-offset-4">
+        <%= paginate @sections %>
+      </div>
   </div>
 </div>

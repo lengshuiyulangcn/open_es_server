@@ -1,7 +1,7 @@
 class SectionsController < ApplicationController
   before_action :authenticate, except: [:index]
   def index
-    @sections = Section.includes(:tags).page params[:page]
+    @sections = Section.preload(:tags, :author, :assignee).page params[:page]
   end
 
   def new
@@ -68,13 +68,19 @@ class SectionsController < ApplicationController
   end
 
   def created
-    @sections = current_user.created_sections.page params[:page]
+    @sections = current_user.created_sections.preload(:tags, :author, :assignee).page params[:page]
     render :index
   end
 
   def assigned
-    @sections = current_user.assigned_sections.page params[:page]
+    @sections = current_user.assigned_sections.preload(:tags, :author, :assignee).page params[:page]
     render :index
+  end
+
+
+  def modify
+    @section = Section.find(params.permit(:id)[:id])
+    @modification = @section.modification
   end
   private
 

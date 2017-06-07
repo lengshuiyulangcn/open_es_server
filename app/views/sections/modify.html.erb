@@ -1,0 +1,16 @@
+<% if can? :create, Modification %>
+  <%= stylesheet_pack_tag 'main' %>
+  <%= javascript_pack_tag 'main' %>
+  <% if @modification.blank? %>
+    <% modified = '' %>
+    <% comment = '' %>
+  <% else %>
+    <% modified = @modification.content %>
+    <% comment = @modification.comment %>
+  <% end %>
+  <%= content_tag :div,
+    nil,
+    id: "section_content",
+    data: { content: @section.content, title: @section.title, id: @section.id, modified: modified, comment: comment }
+  %>
+<% end %>
