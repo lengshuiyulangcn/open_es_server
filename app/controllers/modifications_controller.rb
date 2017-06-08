@@ -1,15 +1,17 @@
 class ModificationsController < ApplicationController
   before_action :authenticate
-  def create
+  def update
     section = Section.find(modification_params[:section_id])
-    if section.modification.blank? && can?(:update, Modification) 
+    if section.modification.blank? && can?(:update, Modification)
       current_user.modifications.create(modification_params)
       head :created
     elsif can? :update, section.modification
       section.modification.update!(modification_params)
-      head :ok
+      flash[:success] = "提交批改成功！"
+      redirect_to :root
     else
-      head 400
+      flash[:success] = "提交失败！"
+      redirect_to :back
     end
   end
 

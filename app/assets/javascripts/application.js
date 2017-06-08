@@ -12,6 +12,7 @@
 //
 //= require rails-ujs
 //= require jquery
+//= require ckeditor/init
 //= require bootstrap/dist/js/bootstrap
 //= require_tree .
 //

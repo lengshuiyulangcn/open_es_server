@@ -80,7 +80,7 @@ class SectionsController < ApplicationController
 
   def modify
     @section = Section.find(params.permit(:id)[:id])
-    @modification = @section.modification
+    @modification = @section.modification || Modification.new
   end
   private
 

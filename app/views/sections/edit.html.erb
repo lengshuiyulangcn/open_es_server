@@ -5,7 +5,7 @@
           <%= f.input :title, label: "ES小项的标题" %>
         </div>
         <div class="col-md-12 text-editor">
-          <%= f.input :content,label: "内容",  as: :text %>
+          <%= f.cktext_area :content,label: "内容",  as: :text %>
         </div>
         <div class="col-md-12 inline-block">
           <%= f.input :tag_ids, label: "选择标签", collection: Tag.all,  as: :check_boxes%>

@@ -1,16 +1,13 @@
-<% if can? :create, Modification %>
-  <%= stylesheet_pack_tag 'main' %>
-  <%= javascript_pack_tag 'main' %>
-  <% if @modification.blank? %>
-    <% modified = '' %>
-    <% comment = '' %>
-  <% else %>
-    <% modified = @modification.content %>
-    <% comment = @modification.comment %>
-  <% end %>
-  <%= content_tag :div,
-    nil,
-    id: "section_content",
-    data: { content: @section.content, title: @section.title, id: @section.id, modified: modified, comment: comment }
-  %>
-<% end %>
+<div class="container">
+  <div class="row">
+      <%= simple_form_for(@modification, html: { class: 'form-horizontal' }) do |f| %>
+        <div class="col-md-12">
+          <%= f.cktext_area :content,label: "内容",  as: :text  %>
+        </div>
+        <%= f.input :section_id, input_html: {value: @section.id},  as: :hidden %>
+        <div class="col-md-12">
+          <%= f.button :submit, "提交", class: "btn btn-info" %>
+        </div>
+      <% end %>
+  </div>
+</div>
