@@ -1,48 +1,42 @@
 <div class="container section-detail">
   <div class="row">
-  <% if @modification %>
       <div class="col-md-12">
           <div class="box">
               <div class="box-icon">
             <%= image_tag @section.author.avatar_url, class: "user-photo" %>
               </div>
               <div class="info">
-                  <h4 class="text-center"><%= @section.title %></h4>
-            <p><%== @modification.highlighted_content %></p>
+                <h4 class="text-center"><%= @section.title %></h4>
+		 <ul class="nav nav-tabs">
+		  <li class="active"><a data-toggle="tab" href="#origin">原文</a></li>
+		  <li><a data-toggle="tab" href="#modified">修改</a></li>
+		</ul>
+                <div class="tab-content">
+		  <div id="origin" class="tab-pane fade in active content">
+		    <p><%== @section.content%></p>
+		  </div>
+                  <div id="modified" class="tab-pane fade content">
+                    <% if @modification.blank? %>
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-md-4 col-md-offset-2">
+                            <a href="http://thecatapi.com"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-md-offset-4">
+                            还木有修改，喵～
+                          </div>
+                        </div>
+                      </div>
+                    <% else %>
+                      <p><%== @modification.content if @modification %></p>
+                    <% end %>
+		  </div>
+		</div>
               </div>
           </div>
       </div>
-    <% else %>
-        <div class="col-md-12">
-          <div class="box">
-            <div class="box-icon">
-        <%= image_tag @section.author.avatar_url, class: "user-photo" %>
-            </div>
-            <div class="info">
-              <h4 class="text-center"><%= @section.title %></h4>
-              <p><%== @section.content %></p>
-            </div>
-          </div>
-        </div>
-   <% end %>
 </div>
-  <% if @modification %>
-  <div class="row comment-box">
-    <div class="col-xs-4 col-md-2">
-  <div class="user-profile">
-    <%= image_tag @modification.user.avatar_url, class: "user-photo" %>
-  </div>
-</div>
-<div class="col-xs-8 col-md-8">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-            <span style="font-size: 12px;"><%=time_ago_in_words(@modification.updated_at)%> ago </span>
-    </div>
-    <div class="panel-body">
-      <%== @modification.comment %>
-    </div>
-         </div>
-       </div>
-    </div>
-    <% end %>
+  <%= render "shared/comment", partial: true %>
 </div>

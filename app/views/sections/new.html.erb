@@ -1,18 +1,25 @@
 <div class="container">
-  <div class="row">
+    <div class="col-md-6 col-md-offset-5">
+      <h3>新建</h3>
+    </div>
       <%= simple_form_for(@section, html: { class: 'form-horizontal' }) do |f| %>
-        <div class="col-md-12">
-          <%= f.input :title, label: "ES小项的标题" %>
+       <div class="row">
+          <div class="col-md-12">
+            <%= f.input :title, label: "ES小项的标题" %>
+          </div>
         </div>
-        <div class="col-md-12">
-          <%= f.cktext_area :content,label: "内容",  as: :text  %>
-        </div>
-        <div class="col-md-12 inline-block">
-          <%= f.input :tag_ids, label: "选择标签", collection: Tag.all,  as: :check_boxes%>
-        </div>
-        <div class="col-md-12">
-          <%= f.button :submit, "提交", class: "btn btn-info" %>
-        </div>
+       <div class="row">
+          <div class="col-md-12 text-editor">
+            <%= f.input :content, label: "内容", :input_html => { :ckeditor => { :height => 350, :toolbar=> 'mini' } },  as: :ckeditor %>
+          </div>
+       </div>
+       <div class="row">
+          <div class="col-md-12 inline-block">
+            <%= f.input :tag_ids, label: "选择标签", collection: Tag.all,  as: :check_boxes%>
+          </div>
+       </div>
+       <div class="row" style="margin-top: 50px;">
+          <%= f.button :submit, "提交", class: "btn btn-info col-xs-8 col-xs-offset-2" %>
+       </div>
       <% end %>
-  </div>
 </div>

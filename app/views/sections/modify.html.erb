@@ -1,13 +1,21 @@
 <div class="container">
   <div class="row">
-      <%= simple_form_for(@modification, html: { class: 'form-horizontal' }) do |f| %>
-        <div class="col-md-12">
-          <%= f.cktext_area :content,label: "内容",  as: :text  %>
-        </div>
-        <%= f.input :section_id, input_html: {value: @section.id},  as: :hidden %>
-        <div class="col-md-12">
-          <%= f.button :submit, "提交", class: "btn btn-info" %>
-        </div>
-      <% end %>
+    <div class="col-md-6 col-md-offset-5">
+      <h3>修改ES</h3>
+    <div class="list-image">
+      <%=image_tag @section.author.avatar_url %>
+    </div>
+    </div>
   </div>
+    <%= simple_form_for(@modification, html: { class: 'form-horizontal' }) do |f| %>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.input :content, label: @section.title, :input_html => { :ckeditor => { :height => 350, :toolbar=> 'mini' } },  as: :ckeditor %>
+        </div>
+          <%= f.input :section_id, input_html: {value: @section.id},  as: :hidden %>
+       </div>
+       <div class="row" style="margin-top: 100px;">
+          <%= f.button :submit, "提交", class: "btn btn-info col-xs-8 col-xs-offset-2" %>
+       </div>
+      <% end %>
 </div>

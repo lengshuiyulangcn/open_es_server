@@ -78,29 +78,6 @@
 .panel {
     position:relative;
 }
-.panel>.panel-heading:after,.panel>.panel-heading:before{
-    position:absolute;
-    top:11px;left:-16px;
-    right:100%;
-    width:0;
-    height:0;
-    display:block;
-    content:" ";
-    border-color:transparent;
-    border-style:solid solid outset;
-    pointer-events:none;
-}
-.panel>.panel-heading:after{
-    border-width:7px;
-    border-right-color:#f7f7f7;
-    margin-top:1px;
-    margin-left:2px;
-}
-.panel>.panel-heading:before{
-    border-right-color:#ddd;
-    border-width:8px;
-}
-
 
 body {padding-top:50px;}
 
@@ -179,3 +156,19 @@ body {padding-top:50px;}
  textarea#section_content {
    height: 300px;
  }
+
+.tab-content {
+  text-align: left;
+  min-height: 300px;
+  div.content {
+    margin-top: 10px;
+  }
+  img {
+    max-width: 80%;
+  }
+} 
+
+.timeline-badge img {
+  border-radius: 50%;
+  width: 60px;
+}
