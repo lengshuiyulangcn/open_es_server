@@ -2,7 +2,7 @@
   "name": "大家的Open ES",
   "short_name": "OES",
   "icons": [{
-    "src": "images/webpush.png",
+    "src": "/webpush.png",
     "type": "image/png"
   }],
   "start_url": "/"

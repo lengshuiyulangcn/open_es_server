@@ -9,7 +9,16 @@ if ('serviceWorker' in navigator) {
         applicationServerKey: vapidPublicKey
       })
         .then(function(subscription) {
-           $.post("/sessions/subscribe", { subscription: subscription.toJSON() });
+          $.ajax({
+            url: "/sessions/subscribe",
+            type: "post",
+            headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+            data: { 
+              subscription: subscription.toJSON()
+            },
+            success: function(data){
+            }
+          });
            console.log('endpoint:', subscription.endpoint);
         });
   }).catch(function(error) {

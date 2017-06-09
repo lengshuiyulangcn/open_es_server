@@ -65,7 +65,7 @@ function onPush(event) {
   event.waitUntil(
     self.registration.showNotification(title, {
       body: "We have received a push message",
-      icon: "/assets/images/webpush.png",
+      icon: "/webpush.png",
       tag:  "push-simple-demo-notification-tag"
     })
   )

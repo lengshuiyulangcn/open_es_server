@@ -7,7 +7,11 @@ class SessionsController < ApplicationController
   end
 
   def subscribe
-    session[:subscription] = JSON.dump(params.fetch(:subscription, {}))
+    subscription = JSON.dump(params[:subscription].permit!.to_hash)
+    if current_user
+      current_user.update(subscription: subscription)
+    end
+    session[:subscription] = subscription 
     head :ok
   end
 
