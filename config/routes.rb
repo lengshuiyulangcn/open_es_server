@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'auth/:provider/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+  post 'sessions/subscribe', to: 'sessions#subscribe'
   root "sections#index"
   get '/sections/created',to: 'sections#created', as: "created_sections"
   get '/sections/:id/modify',to: 'sections#modify', as: "modify_section"
@@ -12,4 +13,5 @@ Rails.application.routes.draw do
   post 'sections/:id/assign', to: 'sections#assign', as: "assign_section"
   resources :modifications
   resources :reviews
+  resources :notifications
 end

@@ -6,6 +6,11 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
+  def subscribe
+    session[:subscription] = JSON.dump(params.fetch(:subscription, {}))
+    head :ok
+  end
+
   def destroy
     reset_session
     flash[:alert] = "已退出登陆"
