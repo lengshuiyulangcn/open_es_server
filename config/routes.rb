@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   resources :sections
   post 'sections/:id/assign', to: 'sections#assign', as: "assign_section"
   resources :modifications
+  resources :reviews
 end

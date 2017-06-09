@@ -52,7 +52,9 @@ class SectionsController < ApplicationController
 
   def show
     @section = Section.find(params.permit(:id)[:id])
+    @reviews = @section.reviews.preload(:user)
     @modification = @section.modification
+    @review = Review.new
   end
 
 

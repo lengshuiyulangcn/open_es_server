@@ -1,41 +1,29 @@
-<div class="row" style="margin-top: 20px;">
+<div class='row' style="margin-top: 20px;">
   <div class="col-md-12">
-    <div class="panel panel-default">
-       <div class="panel-heading">
-         <h3 class="panel-title">用户评论</h3>
-       </div> 
-       <div class="panel-body" style="min-height: 600px;" >      
-    <div class="row">
-      <div class="col-md-12">
-      <ul class="timeline">
-          <li>
-            <div class="timeline-badge">
-        <%= image_tag User.first.avatar_url %>
-            </div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <span class="timeline-title"><%= User.first.name  %></span>
-                <span class="pull-right"><%= time_ago_in_words(Time.now)%><span>
-              </div>
-              <hr>
-              <div class="timeline-body markdown">
-                  吃屎吧
-                  吃屎吧
-                  吃屎吧
-                  吃屎吧
-                  吃屎吧
-                  吃屎吧
-                  吃屎吧
-                  吃屎吧
-                  吃屎吧
-                  吃屎吧
-                  吃屎吧
-                  吃屎吧
-              </div>
-            </div>
-          </li>
-      </ul>
-      </div>
-    </div>
+    <h3 style="font-size: 16px; color: #ABA8A6;">其他评论</h3>
   </div>
+  <div class="col-md-12">
+    <% unless @reviews.blank? %>
+  <ul class="timeline">
+    <% @reviews.each do |review| %>
+      <li>
+        <div class="timeline-badge">
+    <%= image_tag review.user.avatar_url %>
+        </div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <span class="timeline-title"><%= review.user.name%></span>
+            <span class="pull-right">&nbsp <%= time_ago_in_words(review.updated_at)%> ago<span>
+          </div>
+          <hr>
+          <div class="timeline-body markdown">
+            <%== review.content %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 </div>
+</div>
+<%= render "shared/comment_box", partial: true %>

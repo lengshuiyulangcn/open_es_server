@@ -1,0 +1,15 @@
+<div class="row pull-right">
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#comment_box">添加评论</button>
+</div>
+<div class="row collapse pull-right" id="comment_box">
+<%= simple_form_for(@review, html: { class: 'form-horizontal' }) do |f| %>
+  <div class="col-md-8">
+    <%= f.input :content, label: false, :input_html => { :ckeditor => { :height => 200, :toolbar=> 'mini' } }, :label_html => { style: "font-size: 12px; color: #ABA8A6;" }, as: :ckeditor %>
+  </div>
+  <%= f.input :rating, input_html: {id: "review_rating"},  as: :hidden %>
+  <%= f.input :section_id, input_html: {value: @section.id},  as: :hidden %>
+  <div class="col-md-12">
+    <%= f.button :submit, "提交", class: "btn btn-info col-md-8" %>
+  </div>
+<% end %>
+</div>
