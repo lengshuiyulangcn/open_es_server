@@ -89,4 +89,5 @@ class SectionsController < ApplicationController
   def section_params
     params.require(:section).permit(:id,:content,:title, :tag_ids=>[])
   end
+  
 end

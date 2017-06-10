@@ -60,18 +60,26 @@ function onFetch(event) {
 }
 
 function onPush(event) {
-  var title = (event.data && event.data.text()) || "Yay a message";
-
+  var json = event.data ? event.data.json() : {"title" : "DEBUG TITLE", "body" : "DEBUG BODY"};
   event.waitUntil(
-    self.registration.showNotification(title, {
-      body: "We have received a push message",
-      icon: "/webpush.png",
-      tag:  "push-simple-demo-notification-tag"
+    self.registration.showNotification(json.title, {
+      body: json.body,
+      icon: json.icon,
+      data: {
+        target_url: json.target_url
+      }
     })
   )
 }
 
+function onSWNotificationClick(event) {
+    event.notification.close();
+    return event.waitUntil(
+   clients.openWindow(event.notification.data != null ? event.notification.data.target_url : '/')
+  );
+}
 self.addEventListener("push", onPush);
 self.addEventListener('install', onInstall);
 self.addEventListener('activate', onActivate);
+self.addEventListener("notificationclick", onSWNotificationClick);
 self.addEventListener('fetch', onFetch);
