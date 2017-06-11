@@ -1,7 +1,14 @@
 class SectionsController < ApplicationController
   before_action :authenticate, except: [:index]
   def index
-    @sections = Section.preload(:tags, :author, :assignee).order("created_at DESC").page params[:page]
+    if current_user && !current_user.student? 
+      @sections = Section
+    elsif current_user && current_user.student?
+      @sections = Section.where(user_id: current_user.id).or(Section.where(visiable: true))
+    else
+      @sections = Section.where(visiable: true)
+    end
+    @sections = @sections.preload(:tags, :author, :assignee).order("created_at DESC").page params[:page]
   end
 
   def new
@@ -52,9 +59,14 @@ class SectionsController < ApplicationController
 
   def show
     @section = Section.find(params.permit(:id)[:id])
-    @reviews = @section.reviews.preload(:user)
-    @modification = @section.modification
-    @review = Review.new
+    if can? :read, @section
+      @reviews = @section.reviews.preload(:user)
+      @modification = @section.modification
+      @review = Review.new
+    else
+      flash[:error]="此ES设置成不可见了哦！"
+      redirect_to root_path 
+    end
   end
 
 
@@ -87,7 +99,7 @@ class SectionsController < ApplicationController
   private
 
   def section_params
-    params.require(:section).permit(:id,:content,:title, :tag_ids=>[])
+    params.require(:section).permit(:id,:content,:title, :visiable, :tag_ids=>[])
   end
   
 end

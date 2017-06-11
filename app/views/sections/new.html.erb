@@ -9,6 +9,11 @@
           </div>
         </div>
        <div class="row">
+          <div class="col-md-12">
+            <%= f.input :visiable, label: "所有人可见" %>
+          </div>
+        </div>
+       <div class="row">
           <div class="col-md-12 text-editor">
             <%= f.input :content, label: "内容", :input_html => { :ckeditor => { :height => 350, :toolbar=> 'mini' } },  as: :ckeditor %>
           </div>

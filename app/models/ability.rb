@@ -12,6 +12,7 @@ class Ability
     end
     if user.teacher?
       can :create, Section if user.created_sections.blank? || user.created_sections.last.created_at < 1.hours.ago
+      can :read, Section
       can :edit, Section, user_id: user.id
       can :assign, Section, assignee_id: nil
       can :create, Modification
@@ -20,7 +21,11 @@ class Ability
     if user.persisted? && user.student?
       # to prevent spam
       can :create, Section if user.created_sections.blank? || user.created_sections.last.created_at < 1.hours.ago
-      can :edit, Section, user_id: user.id
+      can [:read, :edit], Section, user_id: user.id
+      can :read, Section, visiable: true
+    end
+    if !user.persisted?
+      can :read, Section, visiable: true
     end
     #   else
     #     can :read, :all

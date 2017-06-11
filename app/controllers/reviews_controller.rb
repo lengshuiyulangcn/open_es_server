@@ -22,7 +22,7 @@ class ReviewsController < ApplicationController
     message= {
       icon: current_user.avatar_url,
       title: '新的评论', 
-      body:  "#{current_user.name} 评论了ES「#{section.title}」点击查看,",
+      body:  "#{current_user.name} 评论了ES「#{section.title}」点击查看",
       target_url: section_url(section) 
     }
     Webpush.payload_send webpush_params(user, message)
