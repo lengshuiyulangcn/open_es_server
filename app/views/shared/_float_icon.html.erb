@@ -12,7 +12,7 @@
       <li><a href="<%= sections_path %>" data-toggle="tooltip" data-placement="left" title="首页"><i class="fa fa-home"></i></a></li>
     <% if current_user %>
         <li><a href="<%= new_section_path %>" data-toggle="tooltip" data-placement="left" title="写ES"><i class="fa fa-pencil"></i></a></li>
-      <% if current_user.teacher? %>
+      <% if can? :modify, Section %>
         <li><a href="<%= assigned_sections_path %>" data-toggle="tooltip" data-placement="left" title="批改ES"><i class="fa fa-eraser"></i></a></li>
       <% end %>
       <li><a href="<%= created_sections_path %>" data-toggle="tooltip" data-placement="left" title="我的ES"><i class="fa fa-file-text-o"></i></a></li>
