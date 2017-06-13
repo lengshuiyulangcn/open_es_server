@@ -9,4 +9,9 @@ class Section < ApplicationRecord
   validates :title, presence: true, length: {maximum: 30}
   validates :content, presence: true
   paginates_per 10
+
+
+  def message_recevers_ids
+    reviewers.uniq.pluck(:id)
+  end
 end
