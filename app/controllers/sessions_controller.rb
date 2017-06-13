@@ -15,6 +15,15 @@ class SessionsController < ApplicationController
     head :ok
   end
 
+  def wunderlist
+     token = request.env['omniauth.auth']['info']['token']
+     id = request.env['omniauth.auth']['info']['id']
+     if current_user && current_user.update(wunderlist_token: token, wunderlistId: id)
+       flash[:success] = "关联wunderlist成功！"
+       redirect_to root_path
+     end
+
+  end
   def destroy
     reset_session
     flash[:alert] = "已退出登陆"

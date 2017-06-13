@@ -13,6 +13,9 @@
            (发表：<%=current_user.created_sections.count%>篇, 修改: <%=current_user.modified_sections.count %>篇)
           </span>
         </div> 
+        <% if current_user.wunderlist_token.blank? %>
+          <a href="/auth/wunderlist" title="关联wunderlist"><%=image_tag image_path('wunderlist.png')%></a>
+        <% end %>
         <% end %>
       </div>
     </div>
