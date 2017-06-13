@@ -27,7 +27,7 @@ class ModificationsController < ApplicationController
 
   private
   def modification_params
-    params.require(:modification).permit(:section_id, :content, :comment, :highlighted_content)
+    params.require(:modification).permit(:section_id, :content)
   end
 
   def send_modified_notification(user,section)
