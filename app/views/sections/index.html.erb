@@ -3,7 +3,7 @@
     <% @sections.each do |section| %>
       <div class="col-md-12 list-content">
         <div class="list-image">
-          <%=image_tag section.author.avatar_url %>
+          <%=link_to image_tag(section.author.avatar_url), "https://forum.qilian.jp/#{section.author.login}", target: '_blank' %>
         </div>
         <div class="list-info">
           <div class="list-title">
@@ -18,7 +18,7 @@
               <% end %>
             <% else %>
               <span style="font-size: 12px; color: #ABA8A6;">修改指导: </span>
-              <%= image_tag section.assignee.avatar_url, class: "list-image" %>
+              <%=link_to image_tag(section.assignee.avatar_url, class: 'list-image'), "https://forum.qilian.jp/#{section.assignee.login}", target: '_blank' %>
             <% end %>
           </div>
           <div class="list-meta" id="list-meta-<%=section.id%>">

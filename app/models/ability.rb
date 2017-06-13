@@ -20,7 +20,7 @@ class Ability
     end
     if user.persisted? && user.student?
       # to prevent spam
-      can :create, Section if user.created_sections.blank? || user.created_sections.last.created_at < 1.hours.ago
+      can :create, Section if user.created_sections.blank? || user.created_sections.last.modification 
       can [:read, :edit], Section, user_id: user.id
       can :read, Section, visiable: true
     end
