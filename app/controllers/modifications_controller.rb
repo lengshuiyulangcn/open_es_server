@@ -5,7 +5,7 @@ class ModificationsController < ApplicationController
     if section.modification.blank? && can?(:update, Modification)
       current_user.modifications.create(modification_params)
       flash[:success] = "提交批改成功！"
-      send_modified_notification(section.author,section)
+      NotifyWorker.perform_async(section.author.id, current_user.id, review.section.id, :modification)
       redirect_to :root
     else
       flash[:success] = "提交失败！"
@@ -17,7 +17,7 @@ class ModificationsController < ApplicationController
     if can? :update, section.modification
       section.modification.update!(modification_params)
       flash[:success] = "提交批改成功！"
-      send_modified_notification(section.author,section)
+      NotifyWorker.perform_async(section.author.id, current_user.id, review.section.id, :modification)
       redirect_to :root
     else
       flash[:success] = "提交失败！"
@@ -30,14 +30,4 @@ class ModificationsController < ApplicationController
     params.require(:modification).permit(:section_id, :content)
   end
 
-  def send_modified_notification(user,section)
-    return if user.subscription.blank?
-    message= {
-      icon: current_user.avatar_url,
-      title: 'ES已经批改', 
-      body:  "#{current_user.name} 修改了你的ES",
-      target_url: section_url(section) 
-    }
-    Webpush.payload_send webpush_params(user, message)
-  end
 end

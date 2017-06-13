@@ -1,7 +1,7 @@
 class SectionsController < ApplicationController
   before_action :authenticate, except: [:index]
   def index
-    if current_user && !current_user.student? 
+    if current_user && !current_user.student?
       @sections = Section
     elsif current_user && current_user.student?
       @sections = Section.where(user_id: current_user.id).or(Section.where(visiable: true))

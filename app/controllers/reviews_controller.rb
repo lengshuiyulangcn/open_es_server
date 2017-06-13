@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
       review = current_user.reviews.new(review_params)
       if review.save!
         flash[:success] = "评论成功"
-        send_modified_notification(review.section.author, review.section)
+        NotifyWorker.perform_async(review.section.author.id, current_user.id, review.section.id, :review)
         redirect_to section_path(review.section)
       else
         flash[:success] = "评论失败"
@@ -16,15 +16,5 @@ class ReviewsController < ApplicationController
   private
   def review_params
     params.require(:review).permit(:section_id, :content, :rating)
-  end
-  def send_modified_notification(user,section)
-    return if user.subscription.blank?
-    message= {
-      icon: current_user.avatar_url,
-      title: '新的评论', 
-      body:  "#{current_user.name} 评论了ES「#{section.title}」点击查看",
-      target_url: section_url(section) 
-    }
-    Webpush.payload_send webpush_params(user, message)
   end
 end
