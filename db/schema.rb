@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170613144210) do
+ActiveRecord::Schema.define(version: 20170614111244) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string "data_file_name", null: false
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20170613144210) do
     t.string "login"
     t.string "wunderlist_token"
     t.string "wunderlistId"
+    t.string "wunderlist_listId"
   end
 
 end

@@ -75,6 +75,7 @@ class SectionsController < ApplicationController
     if can? :assign, @section
       @section.assignee = current_user
       @section.save
+      WunderlistWorker.perform_async(current_user.id, "修改ES #{@section.title} #{modify_section_url(@section)}")
       render 'assign'
     else
       head 401
