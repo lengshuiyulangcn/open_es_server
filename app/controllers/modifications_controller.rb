@@ -5,7 +5,7 @@ class ModificationsController < ApplicationController
     if section.modification.blank? && can?(:update, Modification)
       current_user.modifications.create(modification_params)
       flash[:success] = "提交批改成功！"
-      NotifyWorker.perform_async(section.author.id, current_user.id, review.section.id, :modification)
+      NotifyWorker.perform_async(section.author.id, current_user.id, section.id, :modification)
       redirect_to :root
     else
       flash[:success] = "提交失败！"
@@ -17,7 +17,7 @@ class ModificationsController < ApplicationController
     if can? :update, section.modification
       section.modification.update!(modification_params)
       flash[:success] = "提交批改成功！"
-      NotifyWorker.perform_async(section.author.id, current_user.id, review.section.id, :modification)
+      NotifyWorker.perform_async(section.author.id, current_user.id, section.id, :modification)
       redirect_to :root
     else
       flash[:success] = "提交失败！"
