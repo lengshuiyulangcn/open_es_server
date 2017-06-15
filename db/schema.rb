@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170614111244) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string "data_file_name", null: false
     t.string "data_content_type"
@@ -37,8 +40,8 @@ ActiveRecord::Schema.define(version: 20170614111244) do
   end
 
   create_table "modifications", force: :cascade do |t|
-    t.integer "section_id"
-    t.integer "user_id"
+    t.bigint "section_id"
+    t.bigint "user_id"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,10 +50,10 @@ ActiveRecord::Schema.define(version: 20170614111244) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.text "content"
     t.integer "rating"
-    t.integer "section_id"
+    t.bigint "section_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["section_id"], name: "index_reviews_on_section_id"
@@ -58,8 +61,8 @@ ActiveRecord::Schema.define(version: 20170614111244) do
   end
 
   create_table "section_tags", force: :cascade do |t|
-    t.integer "section_id"
-    t.integer "tag_id"
+    t.bigint "section_id"
+    t.bigint "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["section_id"], name: "index_section_tags_on_section_id"
@@ -69,12 +72,11 @@ ActiveRecord::Schema.define(version: 20170614111244) do
   create_table "sections", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "assignee_id"
     t.boolean "visiable", default: false
-    t.index ["assignee_id"], name: "index_sections_on_assignee_id"
     t.index ["user_id"], name: "index_sections_on_user_id"
   end
 
@@ -102,4 +104,11 @@ ActiveRecord::Schema.define(version: 20170614111244) do
     t.string "wunderlist_listId"
   end
 
+  add_foreign_key "modifications", "sections"
+  add_foreign_key "modifications", "users"
+  add_foreign_key "reviews", "sections"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "section_tags", "sections"
+  add_foreign_key "section_tags", "tags"
+  add_foreign_key "sections", "users"
 end
