@@ -1,30 +1,30 @@
-<div class="container">
+<div class="container content-body">
     <div class="col-md-6 col-md-offset-5">
-      <h3>编辑</h3>
+      <h3>撰写新的ES</h3>
     </div>
       <%= simple_form_for(@section, html: { class: 'form-horizontal' }) do |f| %>
        <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-10 col-md-offset-1">
             <%= f.input :title, label: "ES小项的标题" %>
           </div>
         </div>
        <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-10 col-md-offset-1">
             <%= f.input :visiable, label: "所有人可见" %>
           </div>
         </div>
        <div class="row">
-          <div class="col-md-12 text-editor">
+          <div class="col-md-10 text-editor col-md-offset-1">
             <%= f.input :content, label: "内容", :input_html => { :ckeditor => { :height => 350, :toolbar=> 'mini' } },  as: :ckeditor %>
           </div>
        </div>
        <div class="row">
-          <div class="col-md-12 inline-block">
+          <div class="col-md-12 inline-block col-md-offset-1">
             <%= f.input :tag_ids, label: "选择标签", collection: Tag.all,  as: :check_boxes%>
           </div>
        </div>
        <div class="row" style="margin-top: 50px;">
           <%= f.button :submit, "提交", class: "btn btn-info col-xs-8 col-xs-offset-2" %>
        </div>
-      <% end %>
+     <% end %>
 </div>

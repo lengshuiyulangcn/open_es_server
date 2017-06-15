@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container content-body">
   <div class="row">
     <div class="col-md-6 col-md-offset-5">
       <h3>修改ES</h3>
@@ -9,7 +9,7 @@
   </div>
     <%= simple_form_for(@modification, html: { class: 'form-horizontal' }) do |f| %>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10 col-md-offset-1">
           <%= f.input :content, label: @section.title, :input_html => { :ckeditor => { :height => 350, :toolbar=> 'mini', }, value: @modification.content || @section.content },  as: :ckeditor %>
         </div>
           <%= f.input :section_id, input_html: {value: @section.id},  as: :hidden %>

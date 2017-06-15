@@ -8,7 +8,7 @@ class SectionsController < ApplicationController
     else
       @sections = Section.where(visiable: true)
     end
-    @sections = @sections.preload(:tags, :author, :assignee).order("created_at DESC").page params[:page]
+    @sections = @sections.preload(:tags, :author, :assignee, :modification).order("created_at DESC").page params[:page]
   end
 
   def new
@@ -83,12 +83,12 @@ class SectionsController < ApplicationController
   end
 
   def created
-    @sections = current_user.created_sections.preload(:tags, :author, :assignee).order("created_at DESC").page params[:page]
+    @sections = current_user.created_sections.preload(:tags, :author, :assignee, :modification).order("created_at DESC").page params[:page]
     render :index
   end
 
   def assigned
-    @sections = current_user.assigned_sections.preload(:tags, :author, :assignee).order("created_at DESC").page params[:page]
+    @sections = current_user.assigned_sections.preload(:tags, :author, :assignee, :modification).order("created_at DESC").page params[:page]
     render :index
   end
 

@@ -8,6 +8,9 @@
         <div class="list-info">
           <div class="list-title">
             <span class="title-url"><%=link_to section.title, section_path(section) %></span>
+            <% unless section.modification.blank? %>
+              <i class="fa fa-check" aria-hidden="true"></i>
+            <% end %>
           </div>
           <div id="assignee_for_section_<%= section.id %>" class="assignee list-image-small">
             <% if section.assignee.blank? %>

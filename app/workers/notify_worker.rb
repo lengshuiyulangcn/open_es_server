@@ -5,7 +5,7 @@ class NotifyWorker
     users = User.where(id: user_ids)
     current_user = User.find(current_user_id)
     section = Section.find(section_id)
-    target_url = Rails.application.routes.url_helpers.section_url(section, host: "localhost:5000")
+    target_url = Rails.application.routes.url_helpers.section_url(section, host: "es.bocchi.tokyo")
     case message_type.to_sym
     when :modification
       message= {
