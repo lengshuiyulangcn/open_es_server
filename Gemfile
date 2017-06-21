@@ -44,7 +44,7 @@ gem 'kaminari'
 gem 'simple_form'
 gem "font-awesome-rails"
 
-gem 'ckeditor'
+gem 'ckeditor', '4.2.0'
 gem 'carrierwave'
 gem 'mini_magick'
 
@@ -56,6 +56,7 @@ gem 'sidekiq'
 
 gem 'rails_admin'
 gem 'oauth2'
+gem 'non-stupid-digest-assets'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
